@@ -15,7 +15,7 @@ bot = telebot.TeleBot(bot_token)
 @bot.message_handler(commands=['start'])
 def start(message):
     markup = ReplyKeyboardMarkup(resize_keyboard=True)
-    webAppLink = WebAppInfo("http://127.0.0.1:5000/")  # Локальный сервер Flask
+    webAppLink = WebAppInfo("https://clicnewsite.pythonanywhere.com/")  # Локальный сервер Flask
     markup.add(telebot.types.KeyboardButton(text="Открыть Web App", web_app=webAppLink))
 
     bot.send_message(message.chat.id, "Нажми кнопку ниже, чтобы открыть Web App.", reply_markup=markup)

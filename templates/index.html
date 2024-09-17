@@ -4,25 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Генерация и хранение паролей</title>
+    <style>
+        body {
+            background-color: #f0f0f0; /* Светло-серый фон */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Генерация и хранение паролей</h1>
-    <form method="POST">
-        <button type="submit" name="generate">Сгенерировать пароль</button>
-    </form>
+    <div class="container">
+        <h1>Генерация и хранение паролей</h1>
 
-    {% if password %}
-        <p>Ваш сгенерированный пароль: <strong>{{ password }}</strong></p>
+        <!-- Если сгенерирован пароль, отображаем его -->
+        {% if password %}
+            <p>Сгенерированный пароль: <strong>{{ password }}</strong></p>
+            <form method="POST">
+                <input type="hidden" name="password" value="{{ password }}">
+
+                <!-- Поле для ввода названия сайта -->
+                <input type="text" name="site" class="input-field" placeholder="Введите название сайта" required>
+
+                <!-- Поле для ввода имени аккаунта -->
+                <input type="text" name="account" class="input-field" placeholder="Введите имя аккаунта" required>
+
+                <button class="btn" type="submit" name="save">Сохранить пароль</button>
+            </form>
+        {% endif %}
+
         <form method="POST">
-            <input type="hidden" name="password" value="{{ password }}">
-            <button type="submit" name="save">Сохранить пароль</button>
+            <button class="btn" type="submit" name="generate">Сгенерировать пароль</button>
         </form>
-    {% endif %}
 
-    {% if message %}
-        <p>{{ message }}</p>
-    {% endif %}
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
 
-    <a href="{{ url_for('view_passwords') }}">Просмотреть сохраненные пароли</a>
+        <br>
+        <a href="/passwords">Просмотреть сохраненные пароли</a>
+    </div>
 </body>
 </html>
+
+
+
+
+
